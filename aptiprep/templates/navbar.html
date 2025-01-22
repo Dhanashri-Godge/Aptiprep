@@ -1,0 +1,39 @@
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand text-success ms-5 fw-bold" href="/">Aptiprep</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-5">
+          <li class="nav-item ms-5">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item ms-5">
+            <a class="nav-link" href="/about">About Us</a>
+          </li>
+          <li class="nav-item dropdown ms-5">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Services
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/quiz">Quiz</a></li>
+              <li><a class="dropdown-item" href="/polls">Polls</a></li>
+              <li><a class="dropdown-item" href="/survey">Survey</a></li>
+            </ul>
+          </li>
+        </ul>
+        {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success mx-about me-2 hover-bg-black">Log out</button>
+        </form>
+        {% else %}
+          <button class="btn btn-success mx-about me-2 hover-bg-black" type="button" onclick="window.location.href='/login'">Log in</button>
+          <button class="btn btn-success hover-bg-black" type="button" onclick="window.location.href='/sign_up'">Sign in</button>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+{% endblock %}
