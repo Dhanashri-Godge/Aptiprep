@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Test</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <h2 class="text-center">Online Test</h2>
+                <div class="d-flex justify-content-between">
+                    <div><span id="timer" class="font-weight-bold">Time Remaining: 60:00</span></div>
+                    <div>
+                        <button id="preview-button" class="btn btn-secondary">Preview</button>
+                        <button id="next-button" class="btn btn-primary">Next</button>
+                        <button id="submit-button" class="btn btn-danger">Submit</button>
+                    </div>
+                </div>
+                <div id="question-container" class="mt-4">
+                    <!-- Dynamic Question Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let timer = 60 * 60; // 60 minutes
+        let currentQuestionId = 1;  // Placeholder for current question ID
+
+        // Countdown Timer
+        function updateTimer() {
+            let minutes = Math.floor(timer / 60);
+            let seconds = timer % 60;
+            document.getElementById("timer").innerText = `Time Remaining: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            if (timer <= 0) {
+                clearInterval(timerInterval);
+                alert('Time is up! Submitting your test.');
+                submitTest();
+            }
+            timer--;
+        }
+        let timerInterval = setInterval(updateTimer, 1000);
+
+        // Fetch question dynamically using AJAX
+        function loadQuestion(questionId) {
+            $.ajax({
+                url: `/test/get_question/${questionId}/`,
+                method: 'GET',
+                success: function(response) {
+                    $('#question-container').html(response.html);
+                    currentQuestionId = questionId;
+                }
+            });
+        }
+
+        // Load the initial question
+        loadQuestion(currentQuestionId);
+
+        // Button Events
+        $('#next-button').click(function() {
+            loadQuestion(currentQuestionId + 1);
+        });
+
+        $('#preview-button').click(function() {
+            loadQuestion(currentQuestionId - 1);
+        });
+
+        $('#submit-button').click(function() {
+            submitTest();
+        });
+
+        // Function to handle test submission
+        function submitTest() {
+            // Make an AJAX call to submit the answers or finalize the test
+            alert("Test submitted!");
+        }
+    </script>
+</body>
+</html>

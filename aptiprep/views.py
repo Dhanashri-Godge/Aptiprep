@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages as message
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+
 
 
 # Create your views here.
@@ -48,7 +50,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             message.info(request, 'login succesfull')
-            return render(request, 'dashboard.html')
+            return redirect('dashboard')
         else:
             message.error(request, 'Invalid credentials')
             return render(request, 'login.html')
@@ -83,3 +85,16 @@ def create_quiz(request):
         question_forms = [(QuestionForm(prefix=f'question_{i}'), OptionFormSet(prefix=f'options_{i}')) for i in range(1)]
 
     return render(request, 'create_quiz.html', {'question_forms': question_forms})
+
+
+
+
+@login_required
+def dashboard(request):
+    # Replace with logic to calculate tests given
+    tests_given = 5  # Example value; replace with dynamic data
+
+    context = {
+        'tests_given': tests_given,
+    }
+    return render(request, 'dashboard.html', context)
