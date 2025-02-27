@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <!-- Profile Information Card -->
+  <div class="card shadow-sm">
+    <div class="card-header bg-success text-white">
+      <h2 class="mb-0">Profile</h2>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-sm-4"><strong>Username:</strong></div>
+        <div class="col-sm-8">{{ user.username }}</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-4"><strong>Email:</strong></div>
+        <div class="col-sm-8">{{ user.email }}</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-4"><strong>Role:</strong></div>
+        <div class="col-sm-8">{{ user.role }}</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Student Quiz Performance Card -->
+  {% if user.role == "student" %}
+  <div class="card shadow-sm mt-4">
+    <div class="card-header bg-info text-white" data-bs-toggle="collapse" data-bs-target="#studentAnalysis" aria-expanded="false" style="cursor: pointer;">
+      <h4 class="mb-0">Quiz Performance</h4>
+      <small>Click to view detailed analysis</small>
+    </div>
+    <div class="collapse" id="studentAnalysis">
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-sm-6"><strong>Tests Taken:</strong> {{ test_count }}</div>
+          <div class="col-sm-6"><strong>Rank:</strong> {{ rank }}</div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-6"><strong>Average Score:</strong> {{ average_score }}%</div>
+          <div class="col-sm-6"><strong>Total Score:</strong> {{ total_score }}</div>
+        </div>
+        <h5>Recent Quizzes</h5>
+        <ul class="list-group">
+          {% for quiz in recent_quizzes %}
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between">
+              <span>{{ quiz.name }}</span>
+              <span>Score: {{ quiz.score }}%</span>
+            </div>
+          </li>
+          {% endfor %}
+          {% if recent_quizzes|length == 0 %}
+          <li class="list-group-item text-center">No recent quizzes available.</li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  
+  <!-- Faculty Hosted Quizzes Card -->
+  {% if user.role == "faculty" %}
+  <div class="card shadow-sm mt-4">
+    <div class="card-header bg-primary text-white" data-bs-toggle="collapse" data-bs-target="#facultyAnalysis" aria-expanded="false" style="cursor: pointer;">
+      <h4 class="mb-0">Hosted Quizzes</h4>
+      <small>Click to view detailed analysis</small>
+    </div>
+    <div class="collapse" id="facultyAnalysis">
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-sm-6"><strong>Total Quizzes Hosted:</strong> {{ hosted_quizzes_count }}</div>
+          <div class="col-sm-6"><strong>Total Attempts:</strong> {{ total_attempts }}</div>
+        </div>
+        <h5>Quiz List</h5>
+        <ul class="list-group">
+          {% for quiz in hosted_quizzes %}
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between">
+              <span>{{ quiz.name }}</span>
+              <span>Attempts: {{ quiz.attempts }}</span>
+            </div>
+          </li>
+          {% endfor %}
+          {% if hosted_quizzes|length == 0 %}
+          <li class="list-group-item text-center">No quizzes hosted yet.</li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Global Leaderboard</h2>
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Total Score</th>
+                <th>Tests Taken</th>
+                <th>Average Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in entries %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ entry.user.name }}</td>
+                <td>{{ entry.total_score }}</td>
+                <td>{{ entry.num_tests }}</td>
+                <td>{{ entry.average_score }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No leaderboard data available yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

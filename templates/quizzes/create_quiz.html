@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center text-success">Create a Quiz</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Quiz Title</label>
+            <input type="text" class="form-control" name="title" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select class="form-select" name="category">
+                <option value="Aptitude">Aptitude</option>
+                <option value="Coding">Coding</option>
+                <option value="Logical">Logical</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Duration (in minutes)</label>
+            <input type="number" class="form-control" name="duration" required>
+        </div>
+        <button type="submit" class="btn btn-success">Create Quiz</button>
+    </form>
+</div>
+{% endblock %}

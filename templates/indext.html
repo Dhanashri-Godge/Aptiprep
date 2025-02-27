@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Main Content -->
+<div class="container p-3 my-3 border rounded auto-height bg-body-tertiary">
+  <div class="join-participant-container">
+    <div class="join-participant-text">
+      Join as a Participant?
+    </div>
+    <div class="participant-input-container">
+      <input 
+        type="text" 
+        class="participant-input" 
+        placeholder="Enter Participant key here..">
+      <button class="participant-button">
+        <i class="bi bi-search text-white"></i>
+      </button>
+    </div>
+  </div>
+  
+    <div class="container p-5 text-center">
+      <h2 class="display-4 fw-bold">The Easiest Way to Make Your Test More Productive</h2>
+      <p class="lead w-75 mx-auto" style="line-height: 1.6;">
+        Engage your participants with live polls, Q&A, quizzes, <br />
+        and word clouds — whether you meet in the office, online, or in-between.
+      </p>
+      <div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-success mx-about me-2 fw-bold hover-bg-black" type="button" style="width: 15rem; height: 3rem; onclick="onclick="window.location.href='/register'">Get Started</button>
+      </div>
+      <div class="mt-5">
+        <h4>Real-Time Engagement</h4>
+        <p class="text-muted">Polls, quizzes, test, and real-time analysis</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

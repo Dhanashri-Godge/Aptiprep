@@ -1,0 +1,72 @@
+/* Container for the join as participant section */
+.join-participant-container {
+    background-color: #1C5D8C;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;  /* Equivalent to Bootstrap p-3 */
+    margin: 1rem auto; /* my-3 and center horizontally */
+    border: 1px solid rgba(0, 0, 0, 0.1);  /* substitute for border-primary-subtle */
+    border-radius: 50px; /* rounded-pill */
+    width: 50%;
+  }
+  
+  /* Text section styling */
+  .join-participant-text {
+    color: white;
+    font-size: 1.75rem; /* Approx. fs-3 */
+    font-weight: bold;
+    padding-left: 10px;
+  }
+  
+  /* Container for the input and button */
+  .participant-input-container {
+    display: flex;
+    align-items: center;
+    background-color: #fff; /* white background */
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 50px; /* rounded-pill */
+    flex: 1;
+  }
+  
+  /* Style for the input field */
+  .participant-input-container .participant-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    padding: 0.5rem;
+  }
+  
+  /* Style for the search button */
+  .participant-input-container .participant-button {
+    width: 40px;
+    height: 40px;
+    margin-left: 0.5rem;
+    border: none;
+    border-radius: 50%;
+    background-color: #0d6efd; /* Bootstrap primary color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Responsive styling */
+  @media (max-width: 576px) {
+    .join-participant-container {
+      flex-direction: column;
+      width: 90%;
+      padding: 1rem;
+    }
+    
+    .join-participant-text {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .participant-input-container {
+      width: 100%;
+    }
+  }
+  
