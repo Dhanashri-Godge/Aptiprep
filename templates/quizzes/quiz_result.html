@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center text-success">Quiz Results: {{ quiz.title }}</h2>
+  
+  {% if attempt %}
+  <div class="alert alert-success text-center">
+    <h4>Your Score: {{ attempt.score }} / {{ total_questions }}</h4>
+  </div>
+  
+  <div class="card">
+    <div class="card-header">
+      Detailed Breakdown
+    </div>
+    <div class="card-body">
+      {% for result in question_results %}
+      <div class="mb-3">
+        <p><strong>Q{{ forloop.counter }}: {{ result.question_text }}</strong></p>
+        <p>
+          Your answer: 
+          <span class="{% if result.is_correct %}text-success{% else %}text-danger{% endif %}">
+            {{ result.selected_option_text }}
+          </span>
+        </p>
+        <p>Correct answer: <span class="text-success">{{ result.correct_option_text }}</span></p>
+        
+        <hr>
+      </div>
+      {% endfor %}
+      {% if question_results|length == 0 %}
+      <p class="text-center">No detailed results available.</p>
+      {% endif %}
+    </div>
+  </div>
+  
+  <div class="mt-4 text-center">
+    <a href="{% url 'quiz_list' %}" class="btn btn-primary me-2">Back to Quizzes</a>
+    <a href="{% url 'start_quiz' quiz.id %}" class="btn btn-warning">Retake Quiz</a>
+  </div>
+  
+  {% else %}
+  <div class="alert alert-info text-center">
+    No attempt data found for this quiz.
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

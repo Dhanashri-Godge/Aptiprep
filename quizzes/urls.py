@@ -7,4 +7,6 @@ urlpatterns = [
     path("<int:quiz_id>/start/", views.start_quiz, name="start_quiz"),  # Student starts quiz
     path("<int:quiz_id>/submit/", views.submit_quiz, name="submit_quiz"),  # Student submits quiz
     path("<int:quiz_id>/result/", views.quiz_result, name="quiz_result"),  # View quiz result
+    path("<int:quiz_id>/add-question/", views.add_question, name="add_question"),
+    path("<int:question_id>/add-options/", views.add_options, name="add_options"),
 ]
